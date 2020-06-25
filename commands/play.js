@@ -35,7 +35,7 @@ exports.run = (client, message, args, ops) => {
 
     async function play(client, ops, data) {
         let embed = new Discord.MessageEmbed()
-        .setDescription(`Tocando agora: ${data.fila[0].titulo}\nAuthor: ${data.fila[0].author}`)
+        .setDescription(`Tocando agora: ${data.fila[0].titulo}\nDuração: ${data.fila[0].tempo}\nAuthor: ${data.fila[0].author}`)
         .setColor("#36393F");
         message.channel.send(embed);
 
@@ -51,7 +51,7 @@ exports.run = (client, message, args, ops) => {
         let fetched = ops.active.get(dispatcher.guildID);
 
         fetched.fila.shift();
-        if (fetched.fila.length > 1) {
+        if (fetched.fila.length > 0) {
             ops.active.set(dispatcher.guildID, fetched);
             play(client, ops, fetched);
         } else { 
