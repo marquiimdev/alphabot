@@ -27,7 +27,7 @@ exports.run = (client, message, args, ops) => {
 
         if (!data.dispatcher) play(client, ops, data);
         else {
-            message.channel.send(`Adicionado a fila: ${rVideo.titulo}\nPedido por: ${message.author.tag}.`)
+            message.channel.send(`Adicionado a fila: ${rVideo.title}\nPedido por: ${message.author.tag}.`)
         }
 
         ops.active.set(message.guild.id, data)
