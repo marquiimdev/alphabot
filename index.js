@@ -1,6 +1,18 @@
 const Discord = require("discord.js");
 const client = new Discord.Client()
 const config = require("./config.json");
+const http = require('http');
+const express = require('express');
+const app = express();
+
+app.get("/", (request, response) => {
+  console.log(Date.now() + ".");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.herokuapp.com/`);
+}, 60000);
 
 let active = new Map();
 let ops = { active: active }

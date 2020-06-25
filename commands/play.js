@@ -11,7 +11,6 @@ exports.run = (client, message, args, ops) => {
 
         let videos = res.videos;
         let rVideo = videos[0];
-        if (!rVideo) return message.reply("não encontrei esse vídeo.");
 
         let data = ops.active.get(message.guild.id) || {};
         if (!data.connection) data.connection = await message.member.voice.channel.join();
