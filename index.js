@@ -5,7 +5,7 @@ let active = new Map();
 let ops = { active: active }
 
 client.on('ready', function() {
-    console.log('Alfa iniciado com sucesso!')
+    console.log('Alfa iniciado com sucesso.')
 });
 
 client.on('guildMemberAdd', function(member) {
