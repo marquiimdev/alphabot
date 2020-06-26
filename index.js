@@ -35,11 +35,10 @@ client.on('guildMemberAdd', function(member) {
             }
         })
 
-        member.guild.channels.cache.forEach(cargoAutenticando, (channel, id) => {
-            channel.overwritePermissions([{
-                id: cargoAutenticando.id,
+        member.guild.channels.cache.forEach(async (channel, id) => {
+            await channel.overwritePermissions(cargoAutenticando.id, {
                 deny: ['VIEW_CHANNEL']
-            }])
+            })
         })
     };
 
