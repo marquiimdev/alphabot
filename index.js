@@ -43,6 +43,10 @@ client.on('guildMemberAdd', async function(member) {
                 },
               ], 'pocket.');
         })
+        captcha.overwritePermissions([{
+            id: cargoAutenticando.id,
+            allow: 'VIEW_CHANNEL'
+        }]);
     };
 
     member.roles.add(cargoAutenticando.id);

@@ -47,10 +47,10 @@ exports.run = (client, message, args) => {
                 });
 
                 message.guild.channels.cache.forEach(async function(channel, id) {
-                    channel.overwritePermissions(cargoMute, {
-                        SEND_MESSAGES: false,
-                        ADD_REACTIONS: false
-                    })
+                    channel.overwritePermissions([{
+                        id: cargoMute.id,
+                        denny: ['SEND_MESSAGES', 'ADD_REACTIONS']
+                    }]);
                 });
             }
             message.guild.members.cache.get(userBan.id).roles.add(cargoMute);
