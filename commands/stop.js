@@ -1,6 +1,7 @@
 exports.run = (client, message, args, ops) => {
-    let data = ops.active.get(message.guild.id) || {};
-    if (!data) return message.reply("não estou tocando nada.");
-    ops.active.delete(message.guild.id);
-    message.member.voice.channel.leave();
+    if (!message.member.voice.channel) return message.reply("entre em um canal de voz.");
+    if (!message.guild.me.voice.channel) return message.reply("eu não estou tocando nada.")
+    if (!message.member.voice.channel !== message.guild.me.voice.channel) return message.reply("entre no MEU canal de voz.");
+
+    message.guild.me.voice.channel.leave();
 };
