@@ -11,7 +11,7 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.herokuapp.com/`);
+  http.get(`https://botalplha.herokuapp.com`);
 }, 60000);
 
 let active = new Map();
