@@ -41,11 +41,10 @@ exports.run = (client, message, args) => {
                         permissions: []
                     }
                 });
-                message.guild.channels.forEach(cargoMute, async function(channel, id) {
-                    channel.overwritePermissions([{
-                        id: cargoMute.id,
+                message.guild.channels.forEach(async function(channel, id) {
+                    channel.overwritePermissions(cargoMute.id, {
                         deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
-                    }])
+                    })
                 });
             }
             message.guild.members.cache.get(userBan.id).roles.add(cargoMute);
