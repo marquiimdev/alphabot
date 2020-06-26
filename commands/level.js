@@ -9,7 +9,7 @@ exports.run = (client, message, args, ops, database) => {
         if (db.val() == null) return message.reply("esse usuários não se encontra no meu banco de dados.");
 
         let embed = new Discord.MessageEmbed()
-        .setAuthor(`Informações do nível, ${membro.user.tag}`, membro.user.avatarURL())
+        .setAuthor(`Informações do nível, ${membro.tag}`, membro.avatarURL())
         .setDescription(`Você está no level ${db.val().level}!\nExperiência pro próximo nível: (${db.val().xp}/${db.val().level*100}).`)
         .setColor("#36393F");
         message.channel.send(embed);

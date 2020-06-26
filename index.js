@@ -127,8 +127,8 @@ client.on('message', function(message) {
                 if (!spamCh) return;
 
                 let embedUp = new Discord.MessageEmbed()
-                .setTitle(`Parabéns, ${message.author}.`)
-                .setDescription(`Você upou para o level ${db.val().level}!`)
+                .setTitle(`Parabéns, ${message.author.tag}.`)
+                .setDescription(`Você upou para o level ${db.val().level+1}!`)
                 spamCh.send(embedUp);
             }
         }
