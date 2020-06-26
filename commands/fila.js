@@ -6,14 +6,14 @@ exports.run = (client, message, args, ops) => {
     let fila = fetched.fila;
     let tocandoAgora = fila[0];
 
-    let resp = `Tocando agora: ${tocandoAgora.title}`
+    let resp = `Tocando agora: ${tocandoAgora.titulo}`
 
     for (i = 1; i < fila.length; i++) {
-        resp += `\n${i} ${fila[i].title}`
+        resp += `\n${i} ${fila[i].titulo} [${fila[i].tempo}]`
     }
     let embed = new Discord.MessageEmbed()
     .setAuthor(`Informações da fila.`, client.user.avatarURL())
-    .setDescription(`Tocando agora: ${resp}`)
+    .setDescription(`${resp}`)
     .setColor("#36393F");
     message.channel.send(embed)
 }
