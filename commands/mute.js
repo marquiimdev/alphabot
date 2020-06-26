@@ -38,7 +38,7 @@ exports.run = (client, message, args) => {
 
             let cargoMute = message.guild.roles.cache.find(rl => rl.name ==  'Mutado');
             if (!cargoMute) {
-                cargoMute = message.guild.roles.create({
+                cargoMute = await message.guild.roles.create({
                     data: {
                         name: 'Mutado',
                         color: 'WHITE',
