@@ -123,7 +123,7 @@ client.on('message', function(message) {
                     level: db.val().level+1
             });
             
-                let spamCh = message.guild.channels.find(ch => ch.name === "spam");
+                let spamCh = message.guild.channels.cache.find(ch => ch.name === "spam");
                 if (!spamCh) return;
 
                 let embedUp = new Discord.MessageEmbed()
