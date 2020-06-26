@@ -25,7 +25,7 @@ exports.run = (client, message, args, ops) => {
             author: message.author.tag
         });
 
-        if (!data.dispatcher) play(client, ops, data);
+        if (!data.dispatcher) tocar(client, ops, data);
         else {
             message.channel.send(`Adicionado a fila: ${rVideo.title}\nPedido por: ${message.author.tag}.`)
         }
