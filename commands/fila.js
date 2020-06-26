@@ -9,7 +9,7 @@ exports.run = (client, message, args, ops) => {
     let resp = `Tocando agora: ${tocandoAgora.titulo}`
 
     for (i = 1; i < fila.length; i++) {
-        resp += `\n${i} ${fila[i].titulo} [${fila[i].tempo}]`
+        resp += `\n\`${i}\` ${fila[i].titulo} [${fila[i].tempo}]`
     }
     let embed = new Discord.MessageEmbed()
     .setAuthor(`Informações da fila.`, client.user.avatarURL())
