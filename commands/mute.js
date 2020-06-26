@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../config.json");
 const ms = require("ms");
+const moment = require("moment");
 exports.run = (client, message, args) => {
     if (!message.member.hasPermission("MANAGE_ROLES")) return;
 
@@ -19,7 +20,7 @@ exports.run = (client, message, args) => {
 
     const embedConfirm = new Discord.MessageEmbed()
     .setAuthor(`${message.author.tag}`, message.author.avatarURl)
-    .setDescription(`Você realmente deseja mutar \`${userBan.tag}\`?\nDuração: \`$${timeMute}\`\n\Motivo: \`${reasonBan}\``)
+    .setDescription(`Você realmente deseja mutar \`${userBan.tag}\`?\nDuração: \`${timeMute}\`\n\Motivo: \`${reasonBan}\``)
     .setColor("#36393F");
     message.channel.send(embedConfirm).then(msg => {
 
@@ -31,7 +32,7 @@ exports.run = (client, message, args) => {
         collectorV.on('collect', async function() {
             const embedR = new Discord.MessageEmbed()
             .setAuthor(`Relatório do mute.`, message.author.avatarURL)
-            .setDescription(`Author do mute: \`${message.author.tag}\`\nMotivo do mute: \`${reasonBan}\`\nDuração: ${ms(timeMute)}`)
+            .setDescription(`Author do mute: \`${message.author.tag}\`\nMotivo do mute: \`${reasonBan}\`\nTermina em: ${moment(ms(timeMute)).endOf('seconds').fromNow()}`)
             .setColor("#36393F");
             message.channel.send(embedR)
             await userBan.send(embedR).catch(e => console.log(`Ocorreu um erro no mute de ${userBan.tag} por sua DM estar privada.`))
