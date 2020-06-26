@@ -116,7 +116,6 @@ client.on('message', function(message) {
                 xp: db.val().xp+gerarXP
             });
 
-            20 <= 100
             //level up
             if (db.val().level*100 <= db.val().xp) {
                 dbref.update({

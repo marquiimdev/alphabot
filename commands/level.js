@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 exports.run = (client, message, args, ops, database) => {
-    let membro = message.users.mentions.first() || message.guild.members.cache.get(args[0]);
+    let membro = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
     if (!membro) membro = message.author;
     // Referência de onde fica localizado.
     let dbref = database.ref(`Servidores/Levels/${message.guild.id}/${membro.id}`);
