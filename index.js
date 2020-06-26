@@ -36,9 +36,12 @@ client.on('guildMemberAdd', async function(member) {
         })
 
         member.guild.channels.cache.forEach(async (channel, id) => {
-            await channel.overwritePermissions(cargoAutenticando, {
-              VIEW_CHANNEL: false,
-            });
+            await channel.overwritePermissions([
+                {
+                   id: cargoAutenticando.id,
+                   deny: ['VIEW_CHANNEL'],
+                },
+              ], 'pocket.');
         })
     };
 
