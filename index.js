@@ -112,13 +112,13 @@ client.on('message', function(message) {
         } else {
             let gerarXP = Math.floor(Math.random() * 5 - 25) + 5;
 
-            db.val().update({
+            dbref.update({
                 xp: db.val().xp+gerarXP
             });
 
             //level up
             if (db.val().xp >= db.val().level*100) {
-                db.val().update({
+                dbref.update({
                     xp: 0,
                     lvl: db.val().level+1
                 });
