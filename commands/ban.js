@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
     .setDescription(`Para executar um ban, utilize: \`${config.prefixo}ban {Usuário} {Motivo}.\``);
     if (!userBan) return message.channel.send(embedSintaxe);
     if (!reasonBan) return message.channel.send(embedSintaxe);
-    //if (message.guild.members.cache.get(userBan.id).hasPermission("BAN_MEMBERS")) return message.reply("eu não posso banir este membro.")
+    if (message.guild.members.cache.get(userBan.id).hasPermission("BAN_MEMBERS")) return message.reply("eu não posso banir este membro.")
 
     const embedConfirm = new Discord.MessageEmbed()
     .setAuthor(`${message.author.tag}`, message.author.avatarURl)

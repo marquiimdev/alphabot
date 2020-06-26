@@ -24,6 +24,6 @@ exports.run = (client, message, args) => {
         let coletor4 = msg.createReactionCollector(filtro4, {max: 1});
         let coletor5 = msg.createReactionCollector(filtro5, {max: 1});
     }).catch(e => {
-        message.channel.send(`Não enviei o comando por suas mensagens privadas estão desativadas, ative-as e tente novamente, ${message.author}.`)
+        message.channel.send(`Não enviei a mensagem porque suas mensagens privadas estão desativadas, ative-as e tente novamente, ${message.author}.`)
     });
 }; 
