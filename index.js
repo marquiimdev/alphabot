@@ -7,13 +7,13 @@ const app = express();
 const firebase = require("firebase");
 
 let firebaseConfig = {
-    apiKey: "AIzaSyCn4Zpz3hNyiWuuw519rp8nV5pURYg0u_w",
-    authDomain: "alfabotdc.firebaseapp.com",
-    databaseURL: "https://alfabotdc.firebaseio.com",
-    projectId: "alfabotdc",
-    storageBucket: "alfabotdc.appspot.com",
-    messagingSenderId: "394330787649",
-    appId: "1:394330787649:web:6a32183592d7dceec11bc0"
+    apiKey: "AIzaSyCnETbYrxHxz7xR4dPyDSxxmSStHlP12_Y",
+    authDomain: "alphabotdc.firebaseapp.com",
+    databaseURL: "https://alphabotdc.firebaseio.com",
+    projectId: "alphabotdc",
+    storageBucket: "alphabotdc.appspot.com",
+    messagingSenderId: "524110938567",
+    appId: "1:524110938567:web:4bd13b620300ee231d19e2"
 };
 
 // Inicialização do Firebase
@@ -115,7 +115,7 @@ client.on('message', function(message) {
             db.val().update({
                 xp: db.val().xp+gerarXP
             });
-            
+
             //level up
             if (db.val().xp >= db.val().level*100) {
                 db.val().update({
