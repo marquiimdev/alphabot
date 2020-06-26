@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
     .setDescription(`Para executar um mute, utilize: \`${config.prefixo}mute {Usuário} {Tempo} {Motivo}.\``);
 
     let userBan = message.mentions.users.first() || client.users.cache.get(args[0]);
-    let timeMute = args.slice(1).join(" ");
+    let timeMute = args.slice(1);
     let reasonBan = args.slice(2).join(" ");
 
     if (!userBan) return message.channel.send(embedSintaxe);
@@ -49,11 +49,15 @@ exports.run = (client, message, args) => {
                 message.guild.channels.cache.forEach(async function(channel, id) {
                     channel.overwritePermissions([{
                         id: cargoMute.id,
-                        denny: ['SEND_MESSAGES', 'ADD_REACTIONS']
+                        deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
                     }]);
                 });
             }
             message.guild.members.cache.get(userBan.id).roles.add(cargoMute);
+
+            setInterval(() => {
+                message.guild.members.cache.get(userBan.id).roles.remove(cargoMute);
+            }, ms(timeMute));
             msg.delete();
         });
 
