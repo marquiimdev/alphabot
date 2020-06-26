@@ -6,12 +6,12 @@ const express = require('express');
 const app = express();
 
 app.get("/", (request, response) => {
-  console.log(Date.now() + ".");
+  console.log(".");
   response.sendStatus(200);
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`https://botalplha.herokuapp.com`);
+  http.get(`http://botalplha.herokuapp.com`);
 }, 60000);
 
 let active = new Map();
