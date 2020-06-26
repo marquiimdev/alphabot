@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const config = require("../config.json");
 const ms = require("ms");
 const moment = require("moment");
+moment.locale('pt-br');
 exports.run = (client, message, args) => {
     if (!message.member.hasPermission("MANAGE_ROLES")) return;
 
@@ -32,7 +33,7 @@ exports.run = (client, message, args) => {
         collectorV.on('collect', async function() {
             const embedR = new Discord.MessageEmbed()
             .setAuthor(`Relatório do mute.`, message.author.avatarURL)
-            .setDescription(`Author do mute: \`${message.author.tag}\`\nMotivo do mute: \`${reasonBan}\`\nTermina em: ${moment(ms(timeMute)).endOf('seconds').fromNow()}`)
+            .setDescription(`Author do mute: \`${message.author.tag}\`\nMotivo do mute: \`${reasonBan}\`\nTermina em: ${moment(timeMute)}`)
             .setColor("#36393F");
             message.channel.send(embedR)
             await userBan.send(embedR).catch(e => console.log(`Ocorreu um erro no mute de ${userBan.tag} por sua DM estar privada.`))
