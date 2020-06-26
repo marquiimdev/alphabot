@@ -6,6 +6,20 @@ const express = require('express');
 const app = express();
 const firebase = require("firebase");
 
+let firebaseConfig = {
+    apiKey: "AIzaSyCn4Zpz3hNyiWuuw519rp8nV5pURYg0u_w",
+    authDomain: "alfabotdc.firebaseapp.com",
+    databaseURL: "https://alfabotdc.firebaseio.com",
+    projectId: "alfabotdc",
+    storageBucket: "alfabotdc.appspot.com",
+    messagingSenderId: "394330787649",
+    appId: "1:394330787649:web:6a32183592d7dceec11bc0"
+};
+
+// Inicialização do Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 app.get("/", (request, response) => {
   console.log(".");
   response.sendStatus(200);
@@ -84,16 +98,50 @@ client.on('guildMemberAdd', async function(member) {
 });
 
 client.on('message', function(message) {
-    if (message.author.bot) return;
-    if (!message.content.startsWith(config.prefixo)) return;
+
     if (message.channel.type == "dm");
+    if (message.author.bot) return;
+
+    let dbref = database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`);
+    database.ref(`Servidores/Levels/${message.guild.id}/${message.author.id}`).once('value').then(async function(db) {
+        if (db.val() == null) {
+            dbref.set({
+                xp: 0,
+                level: 1
+            });
+        } else {
+            let gerarXP = Math.floor(Math.random() * 5 - 25) + 5;
+
+            db.val().update({
+                xp: db.val().xp+gerarXP
+            });
+            
+            //level up
+            if (db.val().xp >= db.val().level*100) {
+                db.val().update({
+                    xp: 0,
+                    lvl: db.val().level+1
+                });
+                let spamCh = message.guild.channels.find(ch => ch.name === "spam");
+                if (!spamCh) return;
+
+                let embedUp = new Discord.MessageEmbed()
+                .setTitle(`Parabéns, ${message.author}.`)
+                .setDescription(`Você upou para o level ${db.val().level}!`)
+                spamCh.send(embedUp);
+            }
+        }
+    });
+
+    //Comandos
+    if (!message.content.startsWith(config.prefixo)) return;
 
     let args = message.content.slice(config.prefixo.length).split(" ");
     let comando = args.shift().toLocaleLowerCase();
 
     try {
         let arquivoComando = require(`./commands/${comando}.js`);
-        arquivoComando.run(client, message, args, ops);
+        arquivoComando.run(client, message, args, ops, database);
     } catch (erro) {
         console.log(erro);
     };
