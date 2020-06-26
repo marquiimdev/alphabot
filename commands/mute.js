@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
     .setDescription(`Para executar um mute, utilize: \`${config.prefixo}mute {Usuário} {Tempo} {Motivo}.\``);
 
     let userBan = message.mentions.users.first() || client.users.cache.get(args[0]);
-    let timeMute = args.slice(1);
+    let timeMute = args[1];
     let reasonBan = args.slice(2).join(" ");
 
     if (!userBan) return message.channel.send(embedSintaxe);
