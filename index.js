@@ -22,13 +22,13 @@ client.on('ready', function() {
     console.log('Alfa iniciado com sucesso.')
 });
 
-client.on('guildMemberAdd', function(member) {
+client.on('guildMemberAdd', async function(member) {
     const captcha = member.guild.channels.cache.find(ch => ch.name == "captcha");
     if (!captcha) return console.log('Não encontrei um canal de captcha.');
 
     let cargoAutenticando = member.guild.roles.cache.find(rl => rl.name == "Autenticando");
     if (!cargoAutenticando) {
-        cargoAutenticando = member.guild.roles.create({data: {
+        cargoAutenticando = await member.guild.roles.create({data: {
                 name: 'Autenticando',
                 color: 'AQUA',
                 permissions: []
