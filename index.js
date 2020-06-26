@@ -110,7 +110,7 @@ client.on('message', function(message) {
                 level: 1
             });
         } else {
-            let gerarXP = Math.floor(Math.random() * 5 - 25) + 5;
+            let gerarXP = Math.floor(Math.random() * 25 - 5) + 5;
 
             dbref.update({
                 xp: db.val().xp+gerarXP
