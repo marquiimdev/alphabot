@@ -117,10 +117,10 @@ client.on('message', function(message) {
             });
 
             //level up
-            if (db.val().xp >= db.val().level*100) {
+            if (db.val().level*100 >= db.val().xp) {
                 dbref.update({
                     xp: 0,
-                    lvl: db.val().level+1
+                    level: db.val().level+1
                 });
                 let spamCh = message.guild.channels.find(ch => ch.name === "spam");
                 if (!spamCh) return;
