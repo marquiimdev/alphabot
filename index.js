@@ -110,18 +110,19 @@ client.on('message', function(message) {
                 level: 1
             });
         } else {
-            let gerarXP = Math.floor(Math.random() * 25 - 5) + 5;
+            let gerarXP = Math.floor(Math.random() * 15 - 3) + 3;
 
             dbref.update({
                 xp: db.val().xp+gerarXP
             });
 
             //level up
-            if (db.val().xp >= db.val().level) {
+            if (db.val().xp <= db.val().level) {
                 dbref.update({
                     xp: 0,
                     level: db.val().level+1
-                });
+            });
+            
                 let spamCh = message.guild.channels.find(ch => ch.name === "spam");
                 if (!spamCh) return;
 
