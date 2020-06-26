@@ -45,8 +45,9 @@ exports.run = (client, message, args) => {
                         permissions: []
                     }
                 });
+
                 message.guild.channels.cache.forEach(async function(channel, id) {
-                    channel.overwritePermissions(cargoMute.id, {
+                    channel.overwritePermissions(cargoMute, {
                         deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
                     })
                 });
