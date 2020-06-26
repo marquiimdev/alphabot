@@ -4,6 +4,7 @@ const config = require("./config.json");
 const http = require('http');
 const express = require('express');
 const app = express();
+const firebase = require("firebase");
 
 app.get("/", (request, response) => {
   console.log(".");
