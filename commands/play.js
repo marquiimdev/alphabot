@@ -14,7 +14,7 @@ exports.run = (client, message, args, ops) => {
 
         let data = ops.active.get(message.guild.id) || {};
         if (!data.connection) data.connection = await message.member.voice.channel.join();
-        if (!data.fila) data.fila = [];
+        if (!data.fila) data.fila = new Array();
         data.guildID = message.guild.id;
 
         data.fila.push({
