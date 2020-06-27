@@ -12,7 +12,8 @@ exports.run = (client, message, args, ops) => {
         let videos = res.videos;
         let rVideo = videos[0];
 
-        let data = ops.active.get(message.guild.id) || {};
+        let data = ops.active.get(message.guild.id) || [];
+
         if (!data.connection) data.connection = await message.member.voice.channel.join();
         if (!data.fila) data.fila = new Array();
         data.guildID = message.guild.id;
@@ -48,7 +49,6 @@ exports.run = (client, message, args, ops) => {
     };
 
     function finalizar(client, ops, dispatcher) {
-
         let fetched = ops.active.get(dispatcher.guildID);
         fetched.fila.shift();
         
