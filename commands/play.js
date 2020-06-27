@@ -42,12 +42,12 @@ exports.run = (client, message, args, ops) => {
         data.dispatcher = await data.connection.play(ytdl(data.fila[0].url, {filter: 'audioonly'}));
         data.dispatcher.guildID = data.guildID;
 
-        data.dispatcher.once('end', () => {
-            finish(client, ops, this);
+        data.dispatcher.on('finish', () => {
+            finalizar(client, ops, this);
         });
     };
 
-    function finish(client, ops, dispatcher) {
+    function finalizar(client, ops, dispatcher) {
         let fetched = ops.active.get(dispatcher.guildID);
 
         fetched.fila.shift();
