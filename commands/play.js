@@ -42,19 +42,21 @@ exports.run = (client, message, args, ops) => {
         data.dispatcher = await data.connection.play(ytdl(data.fila[0].url, {filter: 'audioonly'}));
         data.dispatcher.guildID = data.guildID;
 
-        data.dispatcher.once('finish', () => {
+        data.dispatcher.on('finish', () => {
             finalizar(client, ops, this);
         });
     };
 
-    function finalizar(client, ops, dispatcher) {
+    async function finalizar(client, ops, dispatcher) {
+
         let fetched = ops.active.get(dispatcher.guildID);
 
-        fetched.fila.shift();
+        await fetched.fila.shift();
         
         if (fetched.fila.length > 0) {
             ops.active.set(dispatcher.guildID, fetched);
             tocar(client, ops, fetched);
+
         } else { 
             ops.active.delete(dispatcher.guildID);
             let vc = client.guilds.get(dispatcher.guildID).me.voice.channel;
