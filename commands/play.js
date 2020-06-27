@@ -60,7 +60,7 @@ exports.run = (client, message, args, ops) => {
         } else { 
             ops.active.delete(dispatcher.guildID);
             let vc = client.guilds.get(dispatcher.guildID).me.voice.channel;
-            if (vc) vc.leave;
+            if (vc) vc.leave();
 
         }   
     };
