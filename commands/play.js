@@ -42,7 +42,7 @@ exports.run = (client, message, args, ops) => {
         data.dispatcher = await data.connection.play(ytdl(data.fila[0].url, {filter: 'audioonly'}));
         data.dispatcher.guildID = data.guildID;
 
-        data.dispatcher.on('finish', () => {
+        data.dispatcher.once('finish', () => {
             finalizar(client, ops, this);
         });
     };
