@@ -47,10 +47,9 @@ exports.run = (client, message, args, ops) => {
         });
     };
 
-    async function finalizar(client, ops, dispatcher) {
+    function finalizar(client, ops, dispatcher) {
 
         let fetched = ops.active.get(dispatcher.guildID);
-
         fetched.fila.shift();
         
         if (fetched.fila.length > 0) {
