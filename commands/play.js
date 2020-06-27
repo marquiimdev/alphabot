@@ -51,7 +51,7 @@ exports.run = (client, message, args, ops) => {
 
         let fetched = ops.active.get(dispatcher.guildID);
 
-        await fetched.fila.shift();
+        fetched.fila.shift();
         
         if (fetched.fila.length > 0) {
             ops.active.set(dispatcher.guildID, fetched);
