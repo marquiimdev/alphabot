@@ -33,7 +33,7 @@ let active = new Map();
 let ops = { active: active }
 
 client.on('ready', function() {
-    console.log('Alfa iniciado com sucesso.')
+    console.log(`${client.user.username} iniciado com sucesso.`)
 });
 
 client.on('guildMemberAdd', async function(member) {

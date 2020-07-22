@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../config.json");
 exports.run = (client, message, args) => {
+    // se membro não tem permissão de bani membros, retorna com a mensagem.
     if (!message.member.hasPermission("BAN_MEMBERS")) return message.reply("você não tem permissão.");
     let userBan = message.mentions.users.first() || client.users.cache.get(args[0]);
     let reasonBan = args.slice(1).join(" ");
@@ -27,10 +28,9 @@ exports.run = (client, message, args) => {
             .setAuthor(`Relatório do banimento.`, message.author.avatarURL)
             .setDescription(`Author do ban: \`${message.author.tag}\`\nMotivo do ban: \`${reasonBan}\``)
             .setColor("#36393F");
-            message.channel.send(embedR)
+            msg.edit(embedR)
             await userBan.send(embedR).catch(e => console.log(`Ocorreu um erro no ban de ${userBan.tag} por sua DM estar privada.`))
             message.guild.members.cache.get(userBan.id).ban();
-            msg.delete();
         });
 
         let filter2 = (reaction, user) => reaction.emoji.name == "❌" && user.id == message.author.id;
