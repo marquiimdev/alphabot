@@ -47,7 +47,7 @@ exports.run = async function(client, message, args, ops, database){
             let level = xy.slice(y, y+1).map(a => a.level);
             let id = String(xy.slice(y, y+1).map(a => a.id));
 
-            x += `**${y+1}**. ${message.guild.members.cache.get(id).tag} [Level: ${level}].\n`
+            x += `**${y+1}**. ${message.guild.members.cache.get(id).user.tag} [Level: ${level}].\n`
         }
     // se tiver < de 10 membros no banco de dados
     } else {
@@ -58,7 +58,7 @@ exports.run = async function(client, message, args, ops, database){
             let id = String(xy.slice(y, y+1).map(a => a.id));
 
             // adicionar coisas a variável criada lá em cima.
-            x += `**${y+1}**. ${message.guild.members.cache.get(id).tag} [Level: ${level}].\n`
+            x += `**${y+1}**. ${message.guild.members.cache.get(id).user.tag} [Level: ${level}].\n`
         }
     }
 
