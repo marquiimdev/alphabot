@@ -1,37 +1,50 @@
 const Discord = require("discord.js");
-const pesquisa = require("yt-search");
-const ytdl = require("ytdl-core");
+const yts = require('youtube-search');
+const ytdl = require('ytdl-core');
+var opts = yts.YouTubeSearchOptions = {
+    maxResults: 10,
+    key: "AIzaSyBES_P0OFzkmqMNDYueY6jebrzLJ-qJjsM"
+};
 exports.run = (client, message, args, ops) => {
     if (!message.member.voice.channel) return message.reply("entre em um canal de voz.");
 
     let pesq = args.join(" ");
     if (!pesq) return message.reply("digite um vídeo válido.");
-    pesquisa(pesq, async function(e, res) {
-        if (e) console.log(e);
 
-        let videos = res.videos;
-        let rVideo = videos[0];
+    yts(pesq, opts, async function(err, res) {
+        if (err) console.log(err);
+        let a = res[0];
 
-        let data = ops.active.get(message.guild.id) || [];
+        ytdl.getInfo(a.id,
+        async function(err, rVideo) {
 
-        if (!data.connection) data.connection = await message.member.voice.channel.join();
-        if (!data.fila) data.fila = new Array();
-        data.guildID = message.guild.id;
+            let data = ops.active.get(message.guild.id) || [];
 
-        data.fila.push({
-            titulo: rVideo.title,
-            url: rVideo.url,
-            views: rVideo.views,
-            tempo: rVideo.duration.timestamp,
-            author: message.author.tag
+            if (!data.connection) data.connection = await message.member.voice.channel.join();
+            if (!data.fila) data.fila = new Array();
+            data.guildID = message.guild.id;
+
+            let tempo = rVideo.length_seconds;
+            min = Math.floor((tempo/100/60) << 0),
+            sec = Math.floor((tempo/100) % 60);
+
+            let rTempo = (min + ':' + sec);
+
+            data.fila.push({
+                titulo: rVideo.title,
+                url: rVideo.url,
+                views: rVideo.short_view_count_text,
+                tempo: rTempo,
+                author: message.author.tag
+            });
+
+            if (!data.dispatcher) tocar(client, ops, data);
+            else {
+                message.channel.send(`Adicionado a fila: ${rVideo.title}\nPedido por: ${message.author.tag}.`)
+            }
+
+            ops.active.set(message.guild.id, data)
         });
-
-        if (!data.dispatcher) tocar(client, ops, data);
-        else {
-            message.channel.send(`Adicionado a fila: ${rVideo.title}\nPedido por: ${message.author.tag}.`)
-        }
-
-        ops.active.set(message.guild.id, data)
     });
 
     async function tocar(client, ops, data) {
