@@ -6,10 +6,10 @@ exports.run = (client, message, args, ops) => {
     let fila = fetched.fila;
     let tocandoAgora = fila[0];
 
-    let resp = `Tocando agora: ${tocandoAgora.titulo}`
+    let resp = `**1**.Tocando agora: ${tocandoAgora.titulo}`
 
     for (i = 1; i < fila.length; i++) {
-        resp += `\n\`${i}\` ${fila[i].titulo} [${fila[i].tempo}]`
+        resp += `\n**${i+1}**. ${fila[i].titulo} \`[${fila[i].tempo}]\``
     }
     let embed = new Discord.MessageEmbed()
     .setAuthor(`Informações da fila.`, client.user.avatarURL())
