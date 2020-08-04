@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const yts = require('youtube-search');
 const ytdl = require('ytdl-core');
+const moment = require("moment");
 var opts = yts.YouTubeSearchOptions = {
     maxResults: 10,
     key: "AIzaSyBES_P0OFzkmqMNDYueY6jebrzLJ-qJjsM"
@@ -24,8 +25,7 @@ exports.run = (client, message, args, ops) => {
             if (!data.fila) data.fila = new Array();
             data.guildID = message.guild.id;
 
-            let tempo = Math.floor((rVideo.length_seconds/60));
-            let rTempo = (`${tempo.replace(",", ":")}`);
+            let rTempo = moment.utc(rVideo.length_seconds*1000).format("HH:mm:ss");
 
             data.fila.push({
                 titulo: rVideo.title,
