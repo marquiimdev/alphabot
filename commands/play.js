@@ -25,7 +25,7 @@ exports.run = (client, message, args, ops) => {
             data.guildID = message.guild.id;
 
             let tempo = Math.floor((rVideo.length_seconds/60));
-            let rTempo = (`${(tempo).replace(":", ",")}`);
+            let rTempo = (`${tempo.replace(",", ":")}`);
 
             data.fila.push({
                 titulo: rVideo.title,
