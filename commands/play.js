@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+// Troquei o "yt-search" para "youtube-search".
 const yts = require('youtube-search');
 const ytdl = require('ytdl-core');
 const moment = require("moment");
@@ -12,6 +13,7 @@ exports.run = (client, message, args, ops) => {
     let pesq = args.join(" ");
     if (!pesq) return message.reply("digite um vídeo válido.");
 
+    // função de pesquisa
     yts(pesq, opts, async function(err, res) {
         if (err) console.log(err);
         let a = res[0];
@@ -44,6 +46,7 @@ exports.run = (client, message, args, ops) => {
         });
     });
 
+    // tocar a música
     async function tocar(client, ops, data) {
         let embed = new Discord.MessageEmbed()
         .setDescription(`Tocando agora: ${data.fila[0].titulo}\nDuração: ${data.fila[0].tempo}\nAuthor: ${data.fila[0].author}`)
@@ -53,6 +56,7 @@ exports.run = (client, message, args, ops) => {
         data.dispatcher = await data.connection.play(ytdl(data.fila[0].url, {filter: 'audioonly'}));
         data.dispatcher.guildID = data.guildID;
 
+        // Quando a música acabar, ele executa o finalizar();
         data.dispatcher.once('finish', function() {
             finalizar(client, ops, this);
         });
@@ -60,12 +64,15 @@ exports.run = (client, message, args, ops) => {
 
     function finalizar(client, ops, dispatcher) {
         let fetched = ops.active.get(dispatcher.guildID);
+        // tira o primeiro item da fila, no caso o que acabou de tocar.
         fetched.fila.shift();
         
+        // se ainda tiver algo na fila
         if (fetched.fila.length > 0) {
             ops.active.set(dispatcher.guildID, fetched);
             tocar(client, ops, fetched);
 
+        // se não tiver mais nada na fila, ele sai do canal.
         } else { 
             ops.active.delete(dispatcher.guildID);
             let vc = client.guilds.cache.get(dispatcher.guildID).me.voice.channel;
