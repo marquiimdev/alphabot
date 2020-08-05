@@ -6,4 +6,5 @@ exports.run = (client, message, args, ops) => {
     if (message.member.voice.channel !== message.guild.me.voice.channel) return message.reply("entre no meu canal de voz.");
 
     message.guild.me.voice.channel.leave();
+    message.reply('estou me retirando do canal de voz.')
 };
