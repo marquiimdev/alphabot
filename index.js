@@ -85,6 +85,7 @@ client.on('guildMemberAdd', async function(member) {
             member.roles.add(cargoMembro);
         });
     });
+    //nota
 
 
     const canal = member.guild.channels.cache.find(ch => ch.name === "boas-vindas");
