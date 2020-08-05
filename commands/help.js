@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
+const config = require('../config.json');
 exports.run = (client, message, args) => {
+    const prefixo = config.prefixo;
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Minha lista de comandos, ${message.author.username}.`, client.user.avatarURL())
-    .setDescription(`\`⚒️ Comandos de moderação.\`\n\`🎧 Comandos de música.\`\n\`🥳 Comandos de diversão.\`\n\`🎖️ Comandos variados.\`\`💵 Comandos de economia/level.\`.`)
+    .setDescription(`\`⚒️ Comandos de moderação.\`\n\`🎧 Comandos de música.\`\n\`🥳 Comandos de diversão.\`\n\`🎖️ Comandos variados.\`\n\`💵 Comandos de economia/level.\`.`)
     .setColor("#36393F")
     message.author.send(embed).then(msg => {
         message.react("📬");
@@ -18,11 +20,88 @@ exports.run = (client, message, args) => {
         let filtro4 = (reaction, user) => reaction.emoji.name == "🎖️" && user.id == message.author.id;
         let filtro5 = (reaction, user) => reaction.emoji.name == "💵" && user.id == message.author.id;
 
-        let coletor = msg.createReactionCollector(filtro, {max: 1});
-        let coletor2 = msg.createReactionCollector(filtro2, {max: 1});
-        let coletor3 = msg.createReactionCollector(filtro3, {max: 1});
-        let coletor4 = msg.createReactionCollector(filtro4, {max: 1});
-        let coletor5 = msg.createReactionCollector(filtro5, {max: 1});
+        let coletor = msg.createReactionCollector(filtro);
+        let coletor2 = msg.createReactionCollector(filtro2);
+        let coletor3 = msg.createReactionCollector(filtro3);
+        let coletor4 = msg.createReactionCollector(filtro4);
+        let coletor5 = msg.createReactionCollector(filtro5);
+
+        coletor.on('collect', () => {
+            const embed1 = new Discord.MessageEmbed()
+            .setAuthor(`⚒️ Comandos de moderação`, message.author.avatarURL())
+            .setDescription(`\`${prefixo}ban [Usuário] [Motivo]\n${prefixo} mute [Usuário] [Tempo] [Motivo]\``)
+            .setColor("#36393F");
+            msg.edit(embed1);
+            msg.react('⬅️');
+
+            let filtroback = (reaction, user) => reaction.emoji.name == "⬅️" && user.id == message.author.id;
+            let coletorback = msg.createReactionCollector(filtroback);
+            coletorback.on('collect', () => {
+                msg.edit(embed);
+            });
+        });
+
+        coletor2.on('collect', () => {
+            const embed1 = new Discord.MessageEmbed()
+            .setAuthor(`🎧 Comandos de música`, message.author.avatarURL())
+            .setDescription(`\`${prefixo}play [nome da música]\n${prefixo}skip\n${prefixo}fila\n${prefixo}stop\``)
+            .setColor("#36393F");
+            msg.edit(embed1);
+            msg.react('⬅️');
+
+            let filtroback = (reaction, user) => reaction.emoji.name == "⬅️" && user.id == message.author.id;
+            let coletorback = msg.createReactionCollector(filtroback);
+            coletorback.on('collect', () => {
+                msg.edit(embed);
+            });
+        });
+
+        coletor3.on('collect', () => {
+            const embed1 = new Discord.MessageEmbed()
+            .setAuthor(`Comandos de `, message.author.avatarURL())
+            .setDescription(`\` \``)
+            .setColor("#36393F");
+            msg.edit(embed1);
+            msg.react('⬅️');
+
+            let filtroback = (reaction, user) => reaction.emoji.name == "⬅️" && user.id == message.author.id;
+            let coletorback = msg.createReactionCollector(filtroback);
+            coletorback.on('collect', () => {
+                msg.edit(embed);
+            });
+        });
+
+        coletor4.on('collect', () => {
+            const embed1 = new Discord.MessageEmbed()
+            .setAuthor(`Comandos de `, message.author.avatarURL())
+            .setDescription(`\` \``)
+            .setColor("#36393F");
+            msg.edit(embed1);
+            msg.react('⬅️');
+
+            let filtroback = (reaction, user) => reaction.emoji.name == "⬅️" && user.id == message.author.id;
+            let coletorback = msg.createReactionCollector(filtroback);
+            coletorback.on('collect', () => {
+                msg.edit(embed);
+            });
+        });
+
+        coletor5.on('collect', () => {
+            const embed1 = new Discord.MessageEmbed()
+            .setAuthor(`Comandos de `, message.author.avatarURL())
+            .setDescription(`\` \``)
+            .setColor("#36393F");
+            msg.edit(embed1);
+            msg.react('⬅️');
+
+            let filtroback = (reaction, user) => reaction.emoji.name == "⬅️" && user.id == message.author.id;
+            let coletorback = msg.createReactionCollector(filtroback);
+            coletorback.on('collect', () => {
+                msg.edit(embed);
+            });
+        });
+
+        
     }).catch(e => {
         message.channel.send(`Não enviei a mensagem porque suas mensagens privadas estão desativadas, ative-as e tente novamente, ${message.author}.`)
     });
