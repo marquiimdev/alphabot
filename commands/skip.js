@@ -5,7 +5,7 @@ exports.run = (client, message, args, ops) => {
 
     if (message.member.voiceChannel !== message.guild.me.voiceChannel) return message.reply("entre no meu canal de voz.");
 
-    let userCount = message.member.voiceChannel.members.size;
+    let userCount = message.member.voice.channel.members.size;
     let required = Math.ceil(userCount/2);
 
     if (!fetched.fila[0].voteSkips) fetched.fila[0].voteSkips = [];
