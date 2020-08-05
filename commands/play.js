@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core');
 const moment = require("moment");
 var opts = yts.YouTubeSearchOptions = {
     maxResults: 10,
-    key: "AIzaSyBES_P0OFzkmqMNDYueY6jebrzLJ-qJjsM"
+    key: "youtube api v.3 key"
 };
 exports.run = (client, message, args, ops) => {
     if (!message.member.voice.channel) return message.reply("entre em um canal de voz.");
