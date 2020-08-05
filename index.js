@@ -7,13 +7,7 @@ const app = express();
 const firebase = require("firebase");
 
 let firebaseConfig = {
-    apiKey: "AIzaSyCnETbYrxHxz7xR4dPyDSxxmSStHlP12_Y",
-    authDomain: "alphabotdc.firebaseapp.com",
-    databaseURL: "https://alphabotdc.firebaseio.com",
-    projectId: "alphabotdc",
-    storageBucket: "alphabotdc.appspot.com",
-    messagingSenderId: "524110938567",
-    appId: "1:524110938567:web:4bd13b620300ee231d19e2"
+    //dados
 };
 
 // Inicialização do Firebase
